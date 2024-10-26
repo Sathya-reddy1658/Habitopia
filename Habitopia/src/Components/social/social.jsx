@@ -10,13 +10,13 @@ import SocialHeader from './SocialHeader';
 import SearchSection from './SearchSection';
 import FriendRequests from './FriendRequests';
 import FriendsList from './FriendsList';
-import { fetchIncomingRequests } from './SocialFunctions.jsx/fetchIncomingRequests';
-import { fetchFriends } from './SocialFunctions.jsx/fetchFriends';
-import { acceptRequest } from './SocialFunctions.jsx/acceptRequest';
-import { rejectRequest } from './SocialFunctions.jsx/rejectRequest';
-import { sendRequest } from './SocialFunctions.jsx/sendRequest';
-import { removeFriend } from './SocialFunctions.jsx/removeFriend';
-import { searchUser } from './SocialFunctions.jsx/searchUser';
+import { fetchIncomingRequests } from './SocialFunctions/fetchIncomingRequests';
+import { fetchFriends } from './SocialFunctions/fetchFriends';
+import { acceptRequest } from './SocialFunctions/acceptRequest';
+import { rejectRequest } from './SocialFunctions/rejectRequest';
+import { sendRequest } from './SocialFunctions/sendRequest';
+import { removeFriend } from './SocialFunctions/removeFriend';
+import { searchUser } from './SocialFunctions/searchUser';
 
 function Social() {
   const { currentUser } = useAuth();
