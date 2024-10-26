@@ -12,6 +12,7 @@
   "dependencies": {
     "@firebase/auth": "^1.8.0",
     "@firebase/firestore": "^4.7.4",
+    "date-fns": "^4.1.0",
     "firebase": "^11.0.1",
     "groq-sdk": "^0.7.0",
     "lucide-react": "^0.453.0",
