@@ -5,7 +5,6 @@ import { app } from '../firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar';
-import Loading from '../../ui/Loading';
 import NavigationTabs from './NavigationTabs';
 import SocialHeader from './SocialHeader';
 import SearchSection from './SearchSection';
@@ -97,7 +96,7 @@ function Social() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
-        <Loading />
+        Loading....
       </div>
     );
   }
