@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { UserCircle, TrendingUp, Award, PlusCircle, Settings, Clipboard } from 'lucide-react';
 import { doc, getDoc, getFirestore, collection, getDocs } from 'firebase/firestore';
 import { app } from '../firebase/firebaseConfig';
+import sc1 from '../../../public/sc1.png'
+import sc2 from '../../../public/sc2.png'
+import sc3 from '../../../public/sc3.png'
 
 function Profile() {
   const { currentUser } = useAuth();
@@ -108,7 +111,15 @@ function Profile() {
               </h1>
               <div>
               <div>Badges: </div>
-              <h1>Score Badge: {scoreBadge}</h1>
+              {scoreBadge >= 1 && 
+                <img src={sc1} className='w-14 h-14'></img>
+              }
+              {scoreBadge >= 2 && 
+                <img src={sc2} className='w-14 h-14'></img>
+              }
+              {scoreBadge >= 3 && 
+                <img src={sc3} className='w-14 h-14'></img>
+              }
               <h1>Completions Badge: {completeBadge}</h1>
               </div>
               <p className='text-indigo-200'>Welcome back to your habit journey!</p>
