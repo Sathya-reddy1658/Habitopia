@@ -147,12 +147,13 @@ function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, tot
     <div>
       {habit && 
         <>
+        {habit.hasMetric=="yes" && 
         <div className='flex flex-wrap'>
-       
         <Graph habit={habit.habitName} current={todayProgress}  total={tar} metric={habit.metricUnit} color="#22C55E"/>
         <Graph habit={habit.habitName} current={streak} total={21} metric="Days" color="#FACC15"/>
-        </div>
         <AreaChart habit={habit.habitName} progData={progressPerDay} target={habit.target}/>
+        </div>
+        }
         </>
       }
     </div>
