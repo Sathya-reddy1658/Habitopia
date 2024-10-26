@@ -4,12 +4,15 @@ import { useAuth } from '../contexts/AuthContext';
 import Logout from '../Auth/Logout';
 import { Link } from 'react-router-dom';
 import { UserCircle, TrendingUp, Award, PlusCircle, Settings, Clipboard } from 'lucide-react';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, collection, getDocs } from 'firebase/firestore';
 import { app } from '../firebase/firebaseConfig';
 
 function Profile() {
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
+  const [habits, setHabits] = useState([]);
+  const [scoreBadge, setScoreBadge] = useState(0);
+  const [completeBadge, setCompleteBadge] = useState(0);
   const db = getFirestore(app);
 
   useEffect(() => {
@@ -31,7 +34,57 @@ function Profile() {
     if (currentUser) {
       fetchUserData();
     }
+
+    const fetchHabits = async () => {
+      if (!currentUser) {
+        console.error("No user is logged in!");
+        setLoading(false);
+        return;
+      }
+      try {
+        const habitsRef = collection(db, "users", currentUser.uid, "habits");
+        const snapshot = await getDocs(habitsRef);
+        const habitsData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setHabits(habitsData);
+        if (habitsData.length > 0) {
+          setSelectedHabit(habitsData[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching habits:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHabits();
+    
   }, [currentUser, db]);
+
+  useEffect(() => {
+    const badgeSetter = ()=>{
+      if (userData){
+        if(userData.totalScore>=100){
+          setScoreBadge(1);
+        }
+        if(userData.totalScore>=500){
+          setScoreBadge(2);
+        }  
+        if(userData.totalScore>=1000){
+          setScoreBadge(3);
+        }
+        let completedCnt = 0;
+        habits.forEach((habit)=>{
+          if(habit.bestStreak>= 4)
+            completedCnt++;
+        })
+        setCompleteBadge(completedCnt);
+    }
+    }
+    badgeSetter();
+  }, [userData]);
+  
   const handleCopy = async ()=>{
     if (userData && userData.fid) {
       try {
@@ -41,8 +94,10 @@ function Profile() {
         console.error('Failed to copy: ', err);
       }
     }
-
   }
+
+  
+  
   return (
     <div className='sm:pt-20 pt-5 select bg-indigo-600 w-full text-white min-h-screen'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
@@ -53,6 +108,11 @@ function Profile() {
               <h1 className='text-3xl sm:text-4xl font-bold'>
               Hello, {currentUser.displayName || "User"}
               </h1>
+              <div>
+              <div>Badges: </div>
+              <h1>Score Badge: {scoreBadge}</h1>
+              <h1>Completions Badge: {completeBadge}</h1>
+              </div>
               <p className='text-indigo-200'>Welcome back to your habit journey!</p>
               {userData && <div className='flex items-center gap-5'>
                               <p className='text-md'>Your FID: {userData.fid}</p> 
