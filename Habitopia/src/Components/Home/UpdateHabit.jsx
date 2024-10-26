@@ -86,10 +86,8 @@ function UpdateHabit() {
   
       // Update habit score in Firestore
       await updateDoc(habitRef, {
-        score: habitCurrentScore + scoreToAdd // Update habit's total score
-      });
+        score: habitCurrentScore + scoreToAdd });
   
-      // Save the progress for the day and the score achieved for the day in dailyProgress
       await setDoc(dateProgressRef, {
         progress: progressValue,
         completed: completedCheckbox,
@@ -103,8 +101,8 @@ function UpdateHabit() {
       setHabit(prevHabit => ({
         ...prevHabit,
         progress: progressValue,
-        score: habitCurrentScore + scoreToAdd // Update habit score in local state
-      }));
+        score: habitCurrentScore + scoreToAdd 
+    }));
   
     } catch (err) {
       console.error('Error updating progress and scores:', err);

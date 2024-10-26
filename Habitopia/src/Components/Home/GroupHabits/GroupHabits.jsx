@@ -10,7 +10,6 @@ import {
   XCircle,
 } from "lucide-react";
 import FooterAndNavbar from "../../FooterAndNavbar/FooterAndNavbar";
-import LoadingSpinner from "../../../ui/Loading";
 import GroupHeader from "./GroupHeader";
 import MembersList from "./MembersList";
 import GroupLeaderBoard from "./GroupLeaderBoard";
@@ -124,7 +123,8 @@ export default function GroupHabitPage() {
   if (loading) {
     return (
       <div className="min-h-screen w-full h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white p-6">
-        <LoadingSpinner />
+        Loading ....
+        <FooterAndNavbar/>
       </div>
     );
   }

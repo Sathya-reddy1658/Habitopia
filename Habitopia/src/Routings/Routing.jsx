@@ -7,7 +7,8 @@ import Home from '../Components/Home/Home'
 import { AuthProvider } from "../Components/contexts/AuthContext";
 import CreateHabit from "../Components/NewHabit/CreateHabit";
 import Profile from "../Components/Profile/Profile";
-import Social from "../Components/social/social"
+import Social from "../Components/social/social";
+import GroupHabitPage from "../Components/Home/GroupHabits/GroupHabits"
 import DataPage from "../Components/DataViz/DataPage"
 
 const Routing = () => {
