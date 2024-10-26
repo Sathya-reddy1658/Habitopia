@@ -13,7 +13,7 @@ const HabitTrackerComponent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className=" bg-gray-50">
       <div className="max-w-xl mx-auto px-4 py-6">
         {/* Header */}
         <header className="mb-6">
