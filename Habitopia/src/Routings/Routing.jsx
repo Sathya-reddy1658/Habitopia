@@ -9,6 +9,7 @@ import { AuthProvider } from "../Components/contexts/AuthContext";
 import CreateHabit from "../Components/NewHabit/CreateHabit";
 import Profile from "../Components/Profile/Profile";
 import Social from "../Components/social/social"
+import DataPage from "../Components/DataViz/DataPage"
 
 const Routing = () => {
   return (
@@ -21,7 +22,8 @@ const Routing = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/newHabit" element={<CreateHabit/>}/>
-        <Route path="profile" element={<Profile/>}/>
+        <Route path='/dataViz' element={<DataPage/>}/>
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="/social" element={<Social/>}/>
     </Routes>
     </AuthProvider>
