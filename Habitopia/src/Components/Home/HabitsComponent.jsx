@@ -198,9 +198,7 @@ const HabitsComponent = ({ selectedDate }) => {
         <h2 className="font-semibold text-gray-900">
           Habits for {format(selectedDate, 'MMMM d, yyyy')}
         </h2>
-        <button className="text-blue-600 text-sm flex items-center">
-          View All <ChevronRight className="w-4 h-4 ml-1" />
-        </button>
+       
       </div>
 
       {habits.length === 0 ? (

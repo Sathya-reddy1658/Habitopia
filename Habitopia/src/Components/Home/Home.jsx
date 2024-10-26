@@ -50,8 +50,8 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 selection:bg-indigo-200">
      <FooterAndNavbar/>
-      <div className="max-w-2xl sm:mt-20 mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {/* Header */}
+      <div className="max-w-2xl sm:mt-20 mt-5 mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    
         <header className="mb-8 sm:mb-12">
           <div className="flex justify-between items-start space-x-4">
             <motion.div
@@ -88,18 +88,16 @@ const Home = () => {
           </div>
         </header>
 
-        {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sm:p-8"
+          className=" rounded-xl shadow-lg border border-gray-100 p-2 sm:p-8"
         >
           <HabitTrackerComponent />
         </motion.div>
       </div>
 
-      {/* Footer with blur effect */}
       <div className="fixed bottom-0 inset-x-0 bg-white/80 backdrop-blur-lg border-t border-gray-200">
         <div className="max-w-2xl mx-auto">
           <FooterAndNavbar />
