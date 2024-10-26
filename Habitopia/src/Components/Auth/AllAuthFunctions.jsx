@@ -28,7 +28,7 @@ const createUserDocument = async (user, fid = null) => {
       fid: user.fid,
       photoURL: user.photoURL || "https://i.pinimg.com/736x/6f/bb/e2/6fbbe2b24b48864513b92d929772d877.jpg",
       createdAt: new Date(),
-      totalScore: 69
+      totalScore: 0
     }, { merge: true });
     
     return userRef;
