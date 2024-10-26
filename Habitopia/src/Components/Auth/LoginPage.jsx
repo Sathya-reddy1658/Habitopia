@@ -83,7 +83,7 @@ const LoginPage = () => {
           </button>
         </form>
         {message && <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-red-300 text-center">{message}</p>}
-        <div className="sm:mt-4 sm:flex hidden">
+        <div className="mt-4 flex">
           <button
             onClick={onGoogleSignIn}
             className="w-full bg-white text-gray-700 py-2 sm:py-1 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition duration-300 ease-in-out flex items-center justify-center"

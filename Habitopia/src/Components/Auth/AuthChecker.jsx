@@ -89,7 +89,7 @@ function AuthChecker() {
                 Let's Begin the Journey
               </button>
              </Link>
-              <div className="sm:flex hidden space-x-3">
+              <div className="flex space-x-3">
                 <Link to="/login" className="flex-1 bg-black text-white py-3 rounded-full font-semibold text-sm flex items-center justify-center" >
                 <button className="flex items-center justify-center " >
                   <span className="mr-2"><img className="w-4" src="./Google.svg" alt="" /></span> Google
