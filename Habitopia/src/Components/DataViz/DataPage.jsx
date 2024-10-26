@@ -3,7 +3,7 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import DataViz from './DataViz';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Activity, TrendingUp, Award } from 'lucide-react';
+import { ChevronDown, Activity, TrendingUp, Award, Users } from 'lucide-react';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar';
 import ArticleCard from './ArticleCard';
 const db = getFirestore();
@@ -117,10 +117,13 @@ const DataPage = () => {
         >
           <div className="p-6">
             <h2 className="text-3xl font-semibold text-white mb-6">{selectedHabit.habitName}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-center gap-4 mb-8">
               <StatCard icon={<Activity className="text-cyan-400" size={24} />} title="Streak" value={streak+" days"} />
               <StatCard icon={<TrendingUp className="text-green-400" size={24} />} title="Completion Rate" value={(totalProgress*100/21).toFixed(2) + "%"} />
-              <StatCard icon={<Award className="text-yellow-400" size={24} />} title="Best Streak" value={bestStreak+" days"} />
+              {!selectedHabit.id.toString().startsWith("group_") ?
+              (<StatCard icon={<Award className="text-yellow-400" size={24} />} title="Best Streak" value={bestStreak+" days"} />)
+              : (<StatCard icon={<Users className="text-yellow-400" size={24} />} title="Group Habit" />)
+              }
             </div>
             <DataViz habit={selectedHabit} todayProgress={todayProgress} setTodayProgress={setTodayProgress} streak={streak} setStreak={setStreak} totalProgress={totalProgress} setTotalProgress={setTotalProgress}  progressPerDay={progressPerDay} setProgressPerDay={setProgressPerDay} bestStreak={bestStreak} setBestStreak={setBestStreak}/>
             <ArticleCard habit={selectedHabit}/>
