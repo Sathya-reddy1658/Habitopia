@@ -49,7 +49,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 selection:bg-indigo-200">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+     <FooterAndNavbar/>
+      <div className="max-w-2xl sm:mt-20 mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
         <header className="mb-8 sm:mb-12">
           <div className="flex justify-between items-start space-x-4">
@@ -64,11 +65,11 @@ const Home = () => {
               </h1>
               <p className="mt-2 text-lg text-gray-600">Let's make habits together!</p>
               
-              <div className="mt-4 flex items-center bg-white rounded-2xl p-4 shadow-sm border border-gray-100 transition-all hover:shadow-md">
+              <div className="mt-4 w-fit flex items-center bg-white rounded-2xl p-4 shadow-sm border border-gray-100 transition-all hover:shadow-md">
                 <div className="p-2 bg-indigo-50 rounded-xl mr-4">
                   <Trophy className="w-6 h-6 text-indigo-600" />
                 </div>
-                <div>
+                <div className=" " >
                   <p className="text-sm font-medium text-gray-500">Your Score</p>
                   <p className="text-2xl font-bold text-indigo-600">
                     {totalScore.toLocaleString()}
