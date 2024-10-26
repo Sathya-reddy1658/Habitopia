@@ -119,12 +119,6 @@ function NewHabit() {
           />
           <p className="text-sm text-white italic">The purpose is vital for maintaining your habit. It will remind you why you started this journey.</p>
           <SelectField
-            label="Frequency"
-            name="freq"
-            control={control}
-            options={["Daily", "Weekly", "Bi-Weekly", "Monthly", "Quarterly", "Yearly"]}
-          />
-          <SelectField
             label="Does this habit have a measurable metric?"
             name="hasMetric"
             control={control}
