@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquarePlus, Users } from 'lucide-react';
+import { Plus, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HabitCard = ({ habit, onClick, isEditable }) => {
@@ -19,41 +19,41 @@ const HabitCard = ({ habit, onClick, isEditable }) => {
 
   return (
     <div
-      className={`flex items-center justify-between bg-gray-50 p-3 rounded-md mb-3 ${
-        isEditable ? 'cursor-pointer hover:bg-gray-100' : ''
-      } transition-colors`}
+      className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100"
+      onClick={isEditable ? onClick : handleDvClick}
     >
-      <div className='grow md:flex justify-between items-center px-5' onClick={handleDvClick}>
+      <div className="flex justify-between items-center">
         <div className="flex items-center space-x-3">
-          <span className="text-gray-800 flex items-center">
-            <span className="mr-2 text-lg">{habit.emoji}</span>
-            <span>{habit.habitName}</span>
-          </span>
+          <div className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center">
+            <span className="text-lg">{habit.emoji}</span>
+          </div>
+          <div>
+            <h3 className="font-medium text-gray-900">{habit.habitName}</h3>
+            <p className="text-gray-500 text-sm">
+              {habit.completed
+                ? "Completed!"
+                : habit.hasMetric === "yes"
+                ? `${habit.progress}/${habit.target} ${habit.metricUnit}`
+                : "Not Completed"}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center space-x-2">
           {isGroupHabit && (
             <button
               onClick={handleGroupClick}
-              className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
-              title="View Group Progress"
+              className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center hover:bg-blue-100 transition-colors"
             >
-              <Users size={20} />
+              <Users className="w-4 h-4 text-blue-600" />
+            </button>
+          )}
+          {isEditable && (
+            <button className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors">
+              <Plus className="w-4 h-4 text-gray-400" />
             </button>
           )}
         </div>
-        <span className="text-sm text-gray-600">
-          {habit.completed
-            ? "Completed!"
-            : (habit.hasMetric=="yes" ? (`${habit.progress}/${habit.target} ${habit.metricUnit}`)
-                : ("Not Completed")
-          )
-          }
-        </span>
       </div>
-      <button 
-        className='text-black text-5xl' 
-        onClick={isEditable ? onClick : undefined}
-      >
-        <SquarePlus />
-      </button>
     </div>
   );
 };

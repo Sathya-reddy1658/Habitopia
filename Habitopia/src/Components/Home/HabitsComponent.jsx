@@ -3,9 +3,10 @@ import { format, isToday, startOfDay } from 'date-fns';
 import { getFirestore, collection, getDocs, doc, getDoc, setDoc, increment } from "firebase/firestore";
 import { getDatabase, ref, get, set } from "firebase/database";
 import { useAuth } from "../contexts/AuthContext";
+import { ChevronRight } from 'lucide-react';
 import HabitCard from './HabitCard';
 
-export default function HabitsComponent({ selectedDate }) {
+const HabitsComponent = ({ selectedDate }) => {
   const { currentUser } = useAuth();
   const [habits, setHabits] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,7 @@ export default function HabitsComponent({ selectedDate }) {
         ...doc.data(),
         createdAt: doc.data().createdAt?.toDate?.() || new Date(doc.data().createdAt)
       }));
+      
       const groupHabitsRef = ref(realtimeDb, 'groupHabits');
       const groupHabitsSnapshot = await get(groupHabitsRef);
       const groupHabitsData = groupHabitsSnapshot.val() || {};
@@ -48,12 +50,14 @@ export default function HabitsComponent({ selectedDate }) {
           isGroupHabit: true,
           createdAt: new Date(habit.createdAt)
         }));
+
       const allHabits = [
         ...regularHabits,
         ...userGroupHabits.filter(gh => 
           !regularHabits.some(rh => rh.id === gh.id)
         )
       ];
+
       const selectedDateStr = format(selectedDate, 'yyyy-MM-dd');
       const habitsWithProgress = await Promise.all(
         allHabits
@@ -120,6 +124,7 @@ export default function HabitsComponent({ selectedDate }) {
         { progress: tempProgress, completed },
         { merge: true }
       );
+
       if (selectedHabit.isGroupHabit) {
         await set(
           ref(realtimeDb, `groupHabits/${selectedHabit.id}/memberProgress/${currentUser.uid}/${dateStr}`),
@@ -130,7 +135,9 @@ export default function HabitsComponent({ selectedDate }) {
           }
         );
       }
+
       const scoreIncrement = !selectedHabit.firstTimeCompleted && completed ? 69 : completed ? 13 : 0;
+      
       if (scoreIncrement > 0) {
         await Promise.all([
           setDoc(
@@ -145,6 +152,7 @@ export default function HabitsComponent({ selectedDate }) {
           )
         ]);
       }
+
       setHabits(habits.map(h =>
         h.id === selectedHabit.id
           ? { ...h, progress: tempProgress, completed }
@@ -156,33 +164,51 @@ export default function HabitsComponent({ selectedDate }) {
     }
   };
 
+  const handleSliderChange = (e) => {
+    if (e.target.value >= selectedHabit.progress) {
+      setTempProgress(Number(e.target.value));
+    }
+  };
+
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-4 my-4">
-        <div className="h-6 w-48 bg-gray-200 animate-pulse rounded mb-4" />
-        <div className="space-y-4">
-          <div className="h-20 bg-gray-200 animate-pulse rounded" />
-          <div className="h-20 bg-gray-200 animate-pulse rounded" />
+      <div className="max-w-xl mx-auto px-4">
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 animate-pulse">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                  <div>
+                    <div className="h-4 w-24 bg-gray-200 rounded mb-2" />
+                    <div className="h-3 w-16 bg-gray-200 rounded" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
   }
 
-  const handleSliderChange = (e)=>{
-    if(e.target.value>=selectedHabit.progress)
-      setTempProgress(Number(e.target.value));
-  }
-
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 my-4">
-      <h3 className="text-xl font-semibold mb-3 text-gray-800">
-        Habits for {format(selectedDate, 'MMMM d, yyyy')}
-      </h3>
-      
+    <div className="max-w-xl mx-auto px-4">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-semibold text-gray-900">
+          Habits for {format(selectedDate, 'MMMM d, yyyy')}
+        </h2>
+        <button className="text-blue-600 text-sm flex items-center">
+          View All <ChevronRight className="w-4 h-4 ml-1" />
+        </button>
+      </div>
+
       {habits.length === 0 ? (
-        <p className="text-gray-600">No habits for this date.</p>
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
+          <p className="text-gray-500">No habits for this date.</p>
+        </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {habits.map(habit => (
             <HabitCard
               key={habit.id}
@@ -199,19 +225,19 @@ export default function HabitsComponent({ selectedDate }) {
       )}
 
       {isModalOpen && selectedHabit && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 max-w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white p-6 rounded-2xl w-full max-w-md">
             {selectedHabit.completed ? (
               <div className="space-y-4">
                 <h2 className="text-xl font-bold text-gray-800">
-                  Congratulations!
+                  Congratulations! 🎉
                 </h2>
                 <p className="text-gray-700">
                   You have achieved your target for {selectedHabit.habitName}!
                 </p>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                  className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
                 >
                   Close
                 </button>
@@ -221,34 +247,33 @@ export default function HabitsComponent({ selectedDate }) {
                 <h2 className="text-xl font-bold text-gray-800">
                   {selectedHabit.habitName}
                 </h2>
-                {selectedHabit.hasMetric=="yes" && (
-                <div>
-                  <p className="text-gray-700">
-                    Current progress: {tempProgress} / {selectedHabit.target}
-                  </p>
-                  <input
-                    type="range"
-                    min="0"
-                    max={selectedHabit.target}
-                    value={tempProgress}
-                    onChange={handleSliderChange}
-                    className="w-full mt-2"
-                  />
-                </div>
-                )
-                }
+                {selectedHabit.hasMetric === "yes" && (
+                  <div>
+                    <p className="text-gray-700">
+                      Current progress: {tempProgress} / {selectedHabit.target} {selectedHabit.metricUnit}
+                    </p>
+                    <input
+                      type="range"
+                      min="0"
+                      max={selectedHabit.target}
+                      value={tempProgress}
+                      onChange={handleSliderChange}
+                      className="w-full mt-2"
+                    />
+                  </div>
+                )}
                 <div className="space-y-2">
                   <button
                     onClick={updateHabitProgress}
-                    className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                    className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                   >
                     Update Progress
                   </button>
                   <button
                     onClick={() => setIsModalOpen(false)}
-                    className="w-full px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+                    className="w-full px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                   >
-                    Close
+                    Cancel
                   </button>
                 </div>
               </div>
@@ -258,4 +283,6 @@ export default function HabitsComponent({ selectedDate }) {
       )}
     </div>
   );
-}
+};
+
+export default HabitsComponent;

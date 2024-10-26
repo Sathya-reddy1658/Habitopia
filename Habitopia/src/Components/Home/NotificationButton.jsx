@@ -9,7 +9,7 @@ const NotificationButton = ({ notificationCount }) => {
         onClick={() => navigate("/groupHabitInvites")}
         className="relative p-2 hover:bg-indigo-100 rounded-full transition-all duration-300 transform hover:scale-105"
       >
-        <Bell className="w-6 h-6 text-white" />
+        <Bell className="w-6 h-6 text-black" />
         {notificationCount > 0 && (
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
             {notificationCount}
