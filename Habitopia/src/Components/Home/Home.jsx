@@ -88,7 +88,6 @@ const Home = () => {
           </div>
         </header>
 
-        {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
@@ -99,7 +98,6 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* Footer with blur effect */}
       <div className="fixed bottom-0 inset-x-0 bg-white/80 backdrop-blur-lg border-t border-gray-200">
         <div className="max-w-2xl mx-auto">
           <FooterAndNavbar />
