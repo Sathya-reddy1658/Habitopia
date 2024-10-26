@@ -10,6 +10,7 @@ import Profile from "../Components/Profile/Profile";
 import Social from "../Components/social/social";
 import GroupHabitPage from "../Components/Home/GroupHabits/GroupHabits"
 import DataPage from "../Components/DataViz/DataPage"
+import GroupHabitInvites from "../Components/social/GroupHabitInvites";
 
 const Routing = () => {
   return (
@@ -24,7 +25,7 @@ const Routing = () => {
         <Route path="/newHabit" element={<CreateHabit/>}/>
         <Route path='/dataViz' element={<DataPage/>}/>
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/groupHabitInvites" element={<GroupHabitPage />}/>
+        <Route path="/groupHabitInvites" element={<GroupHabitInvites />}/>
         <Route path="/social" element={<Social/>}/>
     </Routes>
     </AuthProvider>

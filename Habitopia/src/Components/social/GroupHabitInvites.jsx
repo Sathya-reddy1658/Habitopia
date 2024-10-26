@@ -3,7 +3,6 @@ import { getDatabase, ref, onValue, update, remove } from 'firebase/database';
 import { getFirestore, collection, doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { Check, X, Users, Bell, Calendar, Target, Clock, ArrowLeft } from 'lucide-react';
-import Loading from '../../ui/Loading';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -101,7 +100,8 @@ const GroupHabitInvites = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
-        <Loading />
+        Loading...
+        <FooterAndNavbar/>
       </div>
     )
   }
