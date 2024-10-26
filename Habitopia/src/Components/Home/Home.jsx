@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import NotificationButton from "./NotificationButton";
-import ChallengesComponent from "./ChallengesComponent";
 import FooterAndNavbar from "../FooterAndNavbar/FooterAndNavbar";
 import { useAuth } from "../contexts/AuthContext";
 import HabitTrackerComponent from "./HabitTrackerComponent";

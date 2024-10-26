@@ -221,6 +221,7 @@ export default function HabitsComponent({ selectedDate }) {
                 <h2 className="text-xl font-bold text-gray-800">
                   {selectedHabit.habitName}
                 </h2>
+                {selectedHabit.hasMetric=="yes" && (
                 <div>
                   <p className="text-gray-700">
                     Current progress: {tempProgress} / {selectedHabit.target}
@@ -234,6 +235,8 @@ export default function HabitsComponent({ selectedDate }) {
                     className="w-full mt-2"
                   />
                 </div>
+                )
+                }
                 <div className="space-y-2">
                   <button
                     onClick={updateHabitProgress}

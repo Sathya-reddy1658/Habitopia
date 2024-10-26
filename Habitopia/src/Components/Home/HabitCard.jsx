@@ -42,7 +42,9 @@ const HabitCard = ({ habit, onClick, isEditable }) => {
         <span className="text-sm text-gray-600">
           {habit.completed
             ? "Completed!"
-            : `${habit.progress}/${habit.target} ${habit.metricUnit}`
+            : (habit.hasMetric=="yes" ? (`${habit.progress}/${habit.target} ${habit.metricUnit}`)
+                : ("Not Completed")
+          )
           }
         </span>
       </div>
