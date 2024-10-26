@@ -25,7 +25,7 @@ const createUserDocument = async (user, fid = null) => {
       displayName: user.displayName || name_from_email,
       email: user.email,
       uid: user.uid,
-      fid: fid || user.fid || customAlphabet(user.uid, 6)(),
+      fid: user.fid,
       photoURL: user.photoURL || "https://i.pinimg.com/736x/6f/bb/e2/6fbbe2b24b48864513b92d929772d877.jpg",
       createdAt: new Date(),
       totalScore: 69
@@ -46,7 +46,8 @@ export const doCreateUserWithEmailAndPassword = async (email, password) => {
     const fid = customAlphabet(user.uid, 6)();
 
     await updateProfile(user, {
-      displayName: name_from_email
+      displayName: name_from_email,
+      fid:fid
     });
 
     await createUserDocument(user, fid);
