@@ -13,7 +13,7 @@ function FooterAndNavbar() {
           </Link>
           <div className="flex items-center space-x-6">
             <NavLink to="/home">Home</NavLink>
-            <NavLink to="/dataViz">DataViz</NavLink>
+            <NavLink to="/dataViz">Explore</NavLink>
             <NavLink to="/newHabit">New Habit</NavLink>
             <NavLink to="/social">Social</NavLink>
             <NavLink to="/profile">
@@ -26,7 +26,7 @@ function FooterAndNavbar() {
       <nav className="md:hidden fixed bottom-0 left-0 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white z-50">
         <div className="flex justify-around items-center py-2">
           <NavLink to="/home" icon={<Home />} label="Home" />
-          <NavLink to="/dataViz" icon={<BarChart2 />} label="DataViz" />
+          <NavLink to="/dataViz" icon={<BarChart2 />} label="Explore" />
           <NavLink to="/newHabit" icon={<DiamondPlus />} label="New Habit" />
           <NavLink to="/social" icon={<Users />} label="Social" />
           <NavLink to="/profile" icon={<UserRound />} label="Profile" />

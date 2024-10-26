@@ -104,7 +104,7 @@ function Social() {
   return (
     <div className="bg-indigo-50 min-h-screen">
       <FooterAndNavbar />
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4">
         <SocialHeader notificationCount={notificationCount} fid={userData.fid} />
 
         <NavigationTabs

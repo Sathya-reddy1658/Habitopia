@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import NotificationButton from "./NotificationButton";
-import ChallengesComponent from "./ChallengesComponent";
 import FooterAndNavbar from "../FooterAndNavbar/FooterAndNavbar";
 import { useAuth } from "../contexts/AuthContext";
 import HabitTrackerComponent from "./HabitTrackerComponent";
@@ -60,13 +59,8 @@ const Home = () => {
             Your Score: <span className="font-bold">{totalScore}</span>
           </p>
         </header>
-        <div className="md:flex md:space-x-4">
-          <div className="md:w-1/2">
-            <ChallengesComponent />
-          </div>
-          <div className="md:w-1/2">
+        <div className="md:flex justify-center md:space-x-4">
             <HabitTrackerComponent />
-          </div>
         </div>
       </div>
       <FooterAndNavbar />

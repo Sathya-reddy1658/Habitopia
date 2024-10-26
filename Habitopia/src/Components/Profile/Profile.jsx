@@ -65,15 +65,14 @@ function Profile() {
         </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-          <StatCard icon={<TrendingUp />} title="Streak" value="7 days" />
-          <StatCard icon={<Award />} title="Completed Habits" value="42" />
+          
           <Link to="/newHabit">
             <QuickActionCard title="New Habit" icon={<PlusCircle />} />
           </Link>
           <Link to="/settings">
             <QuickActionCard title="Settings" icon={<Settings />} />
           </Link>
-          <Link to="/viewhabits">
+          <Link to="/dataViz">
           <QuickActionCard title="View Habits" icon={<TrendingUp />} />
         </Link>
         </div>
