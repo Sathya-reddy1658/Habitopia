@@ -94,7 +94,7 @@ function Profile() {
                 {scoreBadge >= 2 && <img src={sc2} className="w-10 h-10 shadow-md rounded-full" alt="Badge 2" />}
                 {scoreBadge >= 3 && <img src={sc3} className="w-10 h-10 shadow-md rounded-full" alt="Badge 3" />}
               </div>
-              <h2 className="mt-2 text-indigo-300">Completions Badge: {completeBadge}</h2>
+              
             </div>
             <Logout />
           </div>
