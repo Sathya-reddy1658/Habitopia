@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { PlusCircle, Users } from 'lucide-react';
-import { SelectField } from '../../ui/SelectField';
-import { InputField } from '../../ui/InputField';
-import { TextareaField } from '../../ui/TextareaField';
+import { SelectField } from './SelectField';
+import { InputField } from './InputField';
+import { TextareaField } from './TextareaField';
 import { getFirestore, collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { getDatabase, ref, get, update, push } from 'firebase/database';
 import { useAuth } from "../contexts/AuthContext";

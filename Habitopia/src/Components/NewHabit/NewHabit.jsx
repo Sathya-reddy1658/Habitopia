@@ -5,9 +5,9 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { v4 as uuidv4 } from 'uuid';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar'; 
-import { SelectField } from '../../ui/SelectField';
-import { InputField } from '../../ui/InputField';
-import { TextareaField } from '../../ui/TextareaField';
+import { SelectField } from './SelectField';
+import { InputField } from './InputField';
+import { TextareaField } from './TextareaField';
 
 const db = getFirestore();
 

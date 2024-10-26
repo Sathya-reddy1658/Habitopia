@@ -6,6 +6,7 @@ import LoginPage from "../Components/Auth/LoginPage";
 import AuthChecker from "../Components/Auth/AuthChecker";
 import Home from '../Components/Home/Home'
 import { AuthProvider } from "../Components/contexts/AuthContext";
+import CreateHabit from "../Components/NewHabit/CreateHabit";
 
 const Routing = () => {
   return (
@@ -17,6 +18,7 @@ const Routing = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/newHabit" element={<CreateHabit/>}/>
     </Routes>
     </AuthProvider>
   )
