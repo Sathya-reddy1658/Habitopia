@@ -1,10 +1,10 @@
 import React from 'react'
-
+import Routing from './Routings/Routing'
 function App() {
   return (
-    <div className="bg-indigo-600 h-screen w-full" >
-      I am app
-    </div>
+    <>
+      <Routing/>
+    </>
   )
 }
 
