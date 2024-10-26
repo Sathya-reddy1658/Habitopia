@@ -33,7 +33,10 @@ const location = useLocation();
 
     console.log("outside :" + tar);
       const fetchTodayProgress = async (habit)=>{
-        const today = new Date().toISOString().split('T')[0]; 
+        const date = new Date();
+        date.setHours(date.getHours() + 5);
+        date.setMinutes(date.getMinutes() + 30);
+        const today = date.toISOString().split('T')[0]; 
         const progressRef = doc(db, "users", currentUser.uid, "habits", habit.id, "dailyProgress", today); 
         try {
           const progressDoc = await getDoc(progressRef);

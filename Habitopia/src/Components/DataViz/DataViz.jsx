@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { getFirestore, collection, getDocs, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import Graph from './Graph';
@@ -8,19 +8,23 @@ const db = getFirestore();
 function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, totalProgress, setTotalProgress, progressPerDay, setProgressPerDay, bestStreak, setBestStreak}) {
   
   const { currentUser } = useAuth();
-  setBestStreak(habit.bestStreak);
-  console.log(habit)
+  useEffect(()=>{
+    setBestStreak(habit.bestStreak);
+    console.log("The current progress is :", todayProgress);
+  }, [])
+  
     //but this does not - const target = habit.target;
     let  tar = 0;
     if (habit && habit.target) {
        tar = habit.target;
-      console.log(tar);
     } else {
       console.log("Habit or habit target is not defined");
     }
-    console.log("outside :" + tar);
       const fetchTodayProgress = async (habit)=>{
-        const today = new Date().toISOString().split('T')[0]; 
+        const date = new Date();
+        date.setHours(date.getHours() + 5);
+        date.setMinutes(date.getMinutes() + 30);
+        const today = date.toISOString().split('T')[0]; 
         const progressRef = doc(db, "users", currentUser.uid, "habits", habit.id, "dailyProgress", today); 
         try {
           const progressDoc = await getDoc(progressRef);
@@ -31,12 +35,11 @@ function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, tot
           } else {
             setTodayProgress(0);
           }
-          console.log("today prog: ", todayProgress);
         } catch (error) {
           console.error("Error fetching or creating daily progress:", error);
         }
       }
-    fetchTodayProgress(habit)
+    fetchTodayProgress(habit);
 
   const fetchStreak = async (habit)=>{
     const dailyProgRef = collection(db, "users", currentUser.uid, "habits", habit.id, "dailyProgress");
@@ -68,7 +71,6 @@ function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, tot
             cnt++;
           }
           setStreak(cnt);
-          console.log("streak ", streak);
           const bestStreak = parseInt(habit.bestStreak) || 0; 
           if (cnt > bestStreak) {
               updateBestStreak(cnt);
@@ -80,14 +82,12 @@ function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, tot
       }
     }
     const updateBestStreak = async (cnt) => {
-      console.log('Updating best streak');
       setBestStreak(cnt);
       const habitRef = doc(db, "users", currentUser.uid, "habits", habit.id);
       try {
           const habitDoc = await getDoc(habitRef);
           if (habitDoc.exists()) {
               await updateDoc(habitRef, { bestStreak: cnt });
-              console.log("Best streak updated to:", cnt);
           }
       } catch (error) {
           console.error("Error updating best streak:", error);
@@ -115,7 +115,7 @@ function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, tot
               }
             }
             setTotalProgress(cnt);
-            console.log("total prog", totalProgress);
+            
         } catch (error) {
             console.error("Error fetching daily progress:", error);
         }
@@ -136,7 +136,6 @@ function DataViz({habit, todayProgress, setTodayProgress, streak, setStreak, tot
               //console.log(doc.id, " => ", doc.data());
             });
             setProgressPerDay(arr);
-            console.log("Progress per day: ", progressPerDay);
             
         } catch (error) {
             console.error("Error fetching daily progress:", error);

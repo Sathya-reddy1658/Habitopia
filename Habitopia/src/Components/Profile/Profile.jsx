@@ -61,27 +61,25 @@ function Profile() {
     fetchHabits();
     
   }, [currentUser, db]);
-
+  const badgeSetter = ()=>{
+    if (userData){
+      if(userData.totalScore>=100){
+        setScoreBadge(1);
+      }
+      if(userData.totalScore>=500){
+        setScoreBadge(2);
+      }  
+      if(userData.totalScore>=1000){
+        setScoreBadge(3);
+      }
+      habits.forEach((habit)=>{
+        if(habit.bestStreak>= 1)
+          setCompleteBadge(completeBadge+1);
+      })
+      
+    }
+  }
   useEffect(() => {
-    const badgeSetter = ()=>{
-      if (userData){
-        if(userData.totalScore>=100){
-          setScoreBadge(1);
-        }
-        if(userData.totalScore>=500){
-          setScoreBadge(2);
-        }  
-        if(userData.totalScore>=1000){
-          setScoreBadge(3);
-        }
-        let completedCnt = 0;
-        habits.forEach((habit)=>{
-          if(habit.bestStreak>= 4)
-            completedCnt++;
-        })
-        setCompleteBadge(completedCnt);
-    }
-    }
     badgeSetter();
   }, [userData]);
   

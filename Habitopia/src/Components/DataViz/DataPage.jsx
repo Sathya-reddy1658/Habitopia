@@ -120,10 +120,7 @@ const DataPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 justify-center gap-4 mb-8">
               <StatCard icon={<Activity className="text-cyan-400" size={24} />} title="Streak" value={streak+" days"} />
               <StatCard icon={<TrendingUp className="text-green-400" size={24} />} title="Completion Rate" value={(totalProgress*100/21).toFixed(2) + "%"} />
-              {!selectedHabit.id.toString().startsWith("group_") ?
-              (<StatCard icon={<Award className="text-yellow-400" size={24} />} title="Best Streak" value={bestStreak+" days"} />)
-              : (<StatCard icon={<Users className="text-yellow-400" size={24} />} title="Group Habit" />)
-              }
+              <StatCard icon={<Award className="text-yellow-400" size={24} />} title="Best Streak" value={bestStreak+" days"} />
             </div>
             <DataViz habit={selectedHabit} todayProgress={todayProgress} setTodayProgress={setTodayProgress} streak={streak} setStreak={setStreak} totalProgress={totalProgress} setTotalProgress={setTotalProgress}  progressPerDay={progressPerDay} setProgressPerDay={setProgressPerDay} bestStreak={bestStreak} setBestStreak={setBestStreak}/>
             <ArticleCard habit={selectedHabit}/>
