@@ -16,11 +16,11 @@ const Routing = () => {
   return (
     
     <AuthProvider>
-
     <Routes>
         <Route path="/" element={<AuthChecker />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/group/:groupId" element={<GroupHabitPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/newHabit" element={<CreateHabit/>}/>
         <Route path='/dataViz' element={<DataPage/>}/>

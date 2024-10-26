@@ -4,7 +4,7 @@ import { getFirestore, collection, doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { Check, X, Users, Bell, Calendar, Target, Clock, ArrowLeft } from 'lucide-react';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const GroupHabitInvites = () => {
   const { currentUser } = useAuth();
@@ -20,7 +20,7 @@ const GroupHabitInvites = () => {
     if (!currentUser) return;
 
     const invitesRef = ref(realtimeDb, `users/${currentUser.uid}/groupHabitInvites`);
-    
+
     const unsubscribe = onValue(invitesRef, (snapshot) => {
       try {
         const invitesData = snapshot.val();
@@ -101,7 +101,7 @@ const GroupHabitInvites = () => {
     return (
       <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
         Loading...
-        <FooterAndNavbar/>
+        <FooterAndNavbar />
       </div>
     )
   }
@@ -109,13 +109,13 @@ const GroupHabitInvites = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <div className="flex items-center gap-3 sm:mt-20 mb-6">
-      <button onClick={() => navigate(-1)} className="p-2  bg-indigo-100 hover:bg-indigo-200 rounded-full"> 
+        <button onClick={() => navigate(-1)} className="p-2  bg-indigo-100 hover:bg-indigo-200 rounded-full">
           <ArrowLeft className="w-6 h-6 text-indigo-600" />
         </button>
         <Bell className="w-8 h-8 text-indigo-600" />
         <h2 className="text-2xl font-bold text-indigo-900">Group Habit Invites</h2>
       </div>
-<FooterAndNavbar/>
+      <FooterAndNavbar />
       {error && (
         <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
           <p className="text-sm">{error}</p>
@@ -192,11 +192,10 @@ const GroupHabitInvites = () => {
                     <button
                       onClick={() => handleAcceptInvite(invite)}
                       disabled={processingInvites[invite.id]}
-                      className={`p-2 rounded-full transition-colors duration-200 ${
-                        processingInvites[invite.id] === 'accepting'
+                      className={`p-2 rounded-full transition-colors duration-200 ${processingInvites[invite.id] === 'accepting'
                           ? 'bg-green-100 cursor-wait'
                           : 'bg-green-100 hover:bg-green-200 text-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
-                      }`}
+                        }`}
                       title="Accept invite"
                     >
                       {processingInvites[invite.id] === 'accepting' ? (
@@ -209,11 +208,10 @@ const GroupHabitInvites = () => {
                     <button
                       onClick={() => handleRejectInvite(invite)}
                       disabled={processingInvites[invite.id]}
-                      className={`p-2 rounded-full transition-colors duration-200 ${
-                        processingInvites[invite.id] === 'rejecting'
+                      className={`p-2 rounded-full transition-colors duration-200 ${processingInvites[invite.id] === 'rejecting'
                           ? 'bg-red-100 cursor-wait'
                           : 'bg-red-100 hover:bg-red-200 text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
-                      }`}
+                        }`}
                       title="Decline invite"
                     >
                       {processingInvites[invite.id] === 'rejecting' ? (
