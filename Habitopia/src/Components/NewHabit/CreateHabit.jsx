@@ -32,7 +32,7 @@ function CreateHabit() {
         </div>
       ) : (
         <div>
-           <button onClick={() => navigate(-1)} className="p-2 sm:mt-20  mt-5 bg-indigo-100 hover:bg-indigo-200 rounded-full"> 
+           <button onClick={() => navigate(-1)} className="p-2 sm:mt-20 mt-5 ml-5 bg-indigo-100 hover:bg-indigo-200 rounded-full"> 
           <ArrowLeft className="w-6 h-6 text-indigo-600" />
         </button>
           {activeView === 'individual' ? <NewHabit /> : <NewGroupHabit />}

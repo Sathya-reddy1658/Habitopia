@@ -23,7 +23,7 @@ function AuthChecker() {
       ) : (
         <>
           {" "}
-          <div className="bg-indigo-600 h-[100vh] sm:h-[150vh] w-full flex flex-col items-center justify-start p-6 relative  text-white ">
+          <div className="bg-indigo-600 h-[100vh] sm:h-[150vh] w-full flex flex-col items-center justify-center p-6 relative  text-white ">
             <div className="h-[500px] w-[500px] border border-white/10 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_20s_linear_infinite]"></div>
             <div className="h-[400px] w-[400px] border border-white/10 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_15s_linear_infinite_reverse]"></div>
             <div className="h-[300px] w-[300px] border border-white/10 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite]"></div>

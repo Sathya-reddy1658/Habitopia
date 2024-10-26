@@ -210,7 +210,7 @@ const NewGroupHabit = () => {
   };
 
   return (
-    <div className="min-h-[130vh] sm:min-h-screen select-none bg-indigo-600 sm:pt-16 flex items-center sm:flex sm:items-center sm:justify-center p-4">
+    <div className="h-[130vh] select-none bg-indigo-600 sm:pt-16  flex items-start justify-center sm:items-center p-4">
       <div className="w-full max-w-md bg-white/10 rounded-lg overflow-hidden">
         <div className="bg-indigo-600 p-4 sm:p-2">
           <h1 className="text-3xl font-bold text-white text-center">New Group Habit</h1>
