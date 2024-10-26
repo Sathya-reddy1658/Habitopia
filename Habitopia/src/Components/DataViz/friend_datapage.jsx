@@ -3,9 +3,11 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import DataViz from './DataViz';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Activity, TrendingUp, Award, Users } from 'lucide-react';
+import { ChevronDown, Activity, TrendingUp, Award } from 'lucide-react';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar';
+import Reply from '../Groq/Reply'
 import ArticleCard from './ArticleCard';
+import { useLocation } from 'react-router-dom';
 const db = getFirestore();
 
 const DataPage = () => {
@@ -19,9 +21,12 @@ const DataPage = () => {
   const [totalProgress, setTotalProgress] = useState(0);
   const [progressPerDay, setProgressPerDay] = useState([]);
   const [bestStreak, setBestStreak] = useState(0);
+  const location = useLocation();
+  const { friendUid } = location.state || {};
 
 
   useEffect(() => {
+    console.log("you are viewing for :",friendUid)
     const fetchHabits = async () => {
       if (!currentUser) {
         console.error("No user is logged in!");
@@ -29,7 +34,7 @@ const DataPage = () => {
         return;
       }
       try {
-        const habitsRef = collection(db, "users", currentUser.uid, "habits");
+        const habitsRef = collection(db, "users", friendUid, "habits");
         const snapshot = await getDocs(habitsRef);
         const habitsData = snapshot.docs.map(doc => ({
           id: doc.id,
@@ -61,7 +66,7 @@ const DataPage = () => {
         className="w-full max-w-4xl text-center md:py-20 py-10"
       >
         <h1 className='text-4xl md:text-5xl font-bold text-white mb-2'>Habit Insights</h1>
-        <p className='text-lg md:text-xl text-white'>Track your progress, celebrate your wins</p>
+        <p className='text-lg md:text-xl text-pink-200'>Track your progress, celebrate your wins</p>
       </motion.header>
 
       <motion.div
@@ -117,13 +122,10 @@ const DataPage = () => {
         >
           <div className="p-6">
             <h2 className="text-3xl font-semibold text-white mb-6">{selectedHabit.habitName}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 justify-center gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <StatCard icon={<Activity className="text-cyan-400" size={24} />} title="Streak" value={streak+" days"} />
               <StatCard icon={<TrendingUp className="text-green-400" size={24} />} title="Completion Rate" value={(totalProgress*100/21).toFixed(2) + "%"} />
-              {!selectedHabit.id.toString().startsWith("group_") ?
-              (<StatCard icon={<Award className="text-yellow-400" size={24} />} title="Best Streak" value={bestStreak+" days"} />)
-              : (<StatCard icon={<Users className="text-yellow-400" size={24} />} title="Group Habit" />)
-              }
+              <StatCard icon={<Award className="text-yellow-400" size={24} />} title="Best Streak" value={bestStreak+" days"} />
             </div>
             <DataViz habit={selectedHabit} todayProgress={todayProgress} setTodayProgress={setTodayProgress} streak={streak} setStreak={setStreak} totalProgress={totalProgress} setTotalProgress={setTotalProgress}  progressPerDay={progressPerDay} setProgressPerDay={setProgressPerDay} bestStreak={bestStreak} setBestStreak={setBestStreak}/>
             <ArticleCard habit={selectedHabit}/>
@@ -140,7 +142,7 @@ const StatCard = ({ icon, title, value }) => (
     <div className="bg-indigo-700 p-3 rounded-full">{icon}</div>
     <div>
       <p className="text-sm  font-bold text-white">{title}</p>
-      <p className="text-xl font-semibold text-white">{value}</p>
+      <p className="text-xl font-semibold text-pink-300">{value}</p>
     </div>
   </div>
 );

@@ -11,7 +11,8 @@ import Social from "../Components/social/social";
 import GroupHabitPage from "../Components/Home/GroupHabits/GroupHabits"
 import DataPage from "../Components/DataViz/DataPage"
 import GroupHabitInvites from "../Components/social/GroupHabitInvites";
-
+import IndividualDataViz from "../Components/DataViz/IndividualDataViz";
+import FriendDataPage from "../Components/DataViz/friend_datapage";
 const Routing = () => {
   return (
     
@@ -24,9 +25,11 @@ const Routing = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/newHabit" element={<CreateHabit/>}/>
         <Route path='/dataViz' element={<DataPage/>}/>
+        <Route path="/data-viz/:habitId" element={<IndividualDataViz />} />
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/groupHabitInvites" element={<GroupHabitInvites />}/>
         <Route path="/social" element={<Social/>}/>
+        <Route path="/friend-dataviz" element={< FriendDataPage />} />
     </Routes>
     </AuthProvider>
   )
