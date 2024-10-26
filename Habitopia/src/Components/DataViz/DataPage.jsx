@@ -5,7 +5,6 @@ import DataViz from './DataViz';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Activity, TrendingUp, Award } from 'lucide-react';
 import FooterAndNavbar from '../FooterAndNavbar/FooterAndNavbar';
-import Reply from '../Groq/Reply'
 import ArticleCard from './ArticleCard';
 const db = getFirestore();
 
@@ -62,7 +61,7 @@ const DataPage = () => {
         className="w-full max-w-4xl text-center md:py-20 py-10"
       >
         <h1 className='text-4xl md:text-5xl font-bold text-white mb-2'>Habit Insights</h1>
-        <p className='text-lg md:text-xl text-pink-200'>Track your progress, celebrate your wins</p>
+        <p className='text-lg md:text-xl text-white'>Track your progress, celebrate your wins</p>
       </motion.header>
 
       <motion.div
@@ -138,7 +137,7 @@ const StatCard = ({ icon, title, value }) => (
     <div className="bg-indigo-700 p-3 rounded-full">{icon}</div>
     <div>
       <p className="text-sm  font-bold text-white">{title}</p>
-      <p className="text-xl font-semibold text-pink-300">{value}</p>
+      <p className="text-xl font-semibold text-white">{value}</p>
     </div>
   </div>
 );
