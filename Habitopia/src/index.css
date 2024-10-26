@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.montserrat {
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-weight:500;
+  }

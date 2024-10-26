@@ -2,7 +2,7 @@ import React from 'react'
 import Routing from './Routings/Routing'
 function App() {
   return (
-    <div className='overflow-hidden'>
+    <div className='overflow-hidden montserrat '>
       <Routing/>
     </div>
   )
