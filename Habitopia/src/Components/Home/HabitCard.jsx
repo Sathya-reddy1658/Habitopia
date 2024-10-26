@@ -20,10 +20,9 @@ const HabitCard = ({ habit, onClick, isEditable }) => {
   return (
     <div
       className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100"
-      onClick={isEditable ? onClick : handleDvClick}
     >
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+      <div className="flex grow justify-between items-center" onClick={handleDvClick}>
+        <div className="flex items-center space-x-3" >
           <div className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center">
             <span className="text-lg">{habit.emoji}</span>
           </div>
@@ -48,7 +47,7 @@ const HabitCard = ({ habit, onClick, isEditable }) => {
             </button>
           )}
           {isEditable && (
-            <button className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors">
+            <button className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors" onClick={isEditable ? onClick : undefined}>
               <Plus className="w-4 h-4 text-gray-400" />
             </button>
           )}

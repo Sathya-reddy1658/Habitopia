@@ -15,11 +15,10 @@ const HabitTrackerComponent = () => {
   return (
     <div className=" bg-gray-50">
       <div className="max-w-xl mx-auto px-4 py-6">
-        {/* Header */}
+       
         <header className="mb-6">
          
 
-          {/* Calendar Component */}
           <div className="mt-4">
             
             <WeeklyCalendarComponent 
@@ -30,7 +29,6 @@ const HabitTrackerComponent = () => {
           </div>
         </header>
 
-        {/* Habits Section */}
         <div>
           
           <div className="space-y-3">

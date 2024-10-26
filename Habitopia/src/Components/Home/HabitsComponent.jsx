@@ -211,7 +211,8 @@ const HabitsComponent = ({ selectedDate }) => {
             <HabitCard
               key={habit.id}
               habit={habit}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setSelectedHabit(habit);
                 setTempProgress(habit.progress || 0);
                 setIsModalOpen(true);

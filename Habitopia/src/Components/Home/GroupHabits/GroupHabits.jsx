@@ -4,11 +4,7 @@ import { getDatabase, ref, onValue, update } from "firebase/database";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { format, subDays } from "date-fns";
 import { useAuth } from "../../contexts/AuthContext";
-import {
-  Clock,
-  CheckCircle,
-  XCircle,
-} from "lucide-react";
+import { Clock, CheckCircle, XCircle } from "lucide-react";
 import FooterAndNavbar from "../../FooterAndNavbar/FooterAndNavbar";
 import GroupHeader from "./GroupHeader";
 import MembersList from "./MembersList";
@@ -33,6 +29,7 @@ export default function GroupHabitPage() {
     const groupRef = ref(db, `groupHabits/${groupId}`);
     const unsubscribeGroup = onValue(groupRef, async (snapshot) => {
       const data = snapshot.val();
+      console.log("Fetched group data:", data); // Log fetched data
       if (data) {
         setGroupData(data);
 
@@ -49,9 +46,7 @@ export default function GroupHabitPage() {
           await Promise.all(memberPromises)
         );
         setMemberDetails(memberDetailsMap);
-  
 
-        //LeaderBoard Ka CODE
         const leaderboardData = Object.entries(data.memberProgress || {})
           .map(([memberId, progress]) => {
             const totalProgress = Object.values(progress || {}).reduce(
@@ -67,6 +62,9 @@ export default function GroupHabitPage() {
           .sort((a, b) => b.totalProgress - a.totalProgress);
         setLeaderboard(leaderboardData);
 
+        setLoading(false);
+      } else {
+        console.log("No data found for groupHabits");
         setLoading(false);
       }
     });

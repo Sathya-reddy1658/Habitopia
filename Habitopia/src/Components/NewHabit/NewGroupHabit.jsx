@@ -150,7 +150,6 @@ const NewGroupHabit = () => {
     }
   };
 
-  // Function to create the habit in creator's Firestore habits collection
   const createHabitForCreator = async (habitData) => {
     try {
       const habitRef = doc(collection(db, "users", currentUser.uid, "habits"));
@@ -185,20 +184,16 @@ const NewGroupHabit = () => {
         createdAt: new Date().toISOString()
       };
 
-      // Create group habit in Realtime DB
       await createGroupHabitInRealtimeDB(habitData);
 
-      // Create habit in creator's Firestore collection
       await createHabitForCreator(habitData);
 
-      // Send invites to selected friends
       await sendGroupHabitInvites(habitData);
 
       setSuccessMessage("Group Habit created and invitations sent!");
       reset();
       setSelectedUsers([]);
 
-      // Navigate to habits page after short delay
       setTimeout(() => {
         navigate('/home');
       }, 2000);
@@ -264,7 +259,6 @@ const NewGroupHabit = () => {
             placeholder="What's the group's purpose for this habit?"
           />
 
-          {/* Friends selection section */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-white">Invite Friends</label>
             <div className="grid grid-cols-1 gap-2">
@@ -288,7 +282,6 @@ const NewGroupHabit = () => {
             </div>
           </div>
 
-          {/* Habit details fields */}
           <SelectField
             label="Frequency"
             name="freq"
