@@ -65,6 +65,7 @@ function Social() {
       setNotificationCount(invitesData ? Object.keys(invitesData).length : 0);
     });
 
+
     return () => unsubscribe();
   }, [currentUser]);
 
@@ -97,7 +98,7 @@ function Social() {
     return (
       <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
         Loading....
-        <FooterAndNavbar/>
+        <FooterAndNavbar />
       </div>
     );
   }
@@ -132,7 +133,7 @@ function Social() {
 
 
         <div className="space-y-6">
-          {activeTab === 'requests' && (
+          {activeTab === 'requests' && incomingRequests.length > 0 && (
             <FriendRequests
               requests={incomingRequests}
               onAccept={(requestId) => acceptRequest(requestId, currentUser, setIncomingRequests, showNotification, setFriends)}
@@ -143,11 +144,11 @@ function Social() {
           )}
 
           {activeTab === 'friends' && (
-           <FriendsList
-           friends={friends}
-           onViewProfile={(friendId) => viewProfile(friendId, navigate)}
-           onRemoveFriend={(friendId) => removeFriend(friendId, currentUser, showNotification, setFriends)}
-       />
+            <FriendsList
+              friends={friends}
+              onViewProfile={(friendId) => viewProfile(friendId, navigate)}
+              onRemoveFriend={(friendId) => removeFriend(friendId, currentUser, showNotification, setFriends)}
+            />
           )}
         </div>
       </div>
