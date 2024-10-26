@@ -85,7 +85,7 @@ function AuthChecker() {
               </p>
 
              <Link to={"/login"} className="w-full bg-white text-indigo-600 py-3 rounded-full mb-10 mt-3 font-semibold text-sm" >
-             <button>
+             <button className="w-full mb-10">
                 Let's Begin the Journey
               </button>
              </Link>
