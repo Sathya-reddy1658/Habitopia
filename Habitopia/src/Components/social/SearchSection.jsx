@@ -11,7 +11,7 @@ export default function SearchSection({
   sendRequest 
 }) {
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+    <div className="bg-white rounded-xl shadow-lg p-4 mb-8 ">
       <div className="flex space-x-4">
         <input
           type="text"
@@ -22,7 +22,7 @@ export default function SearchSection({
         />
         <button
           onClick={searchUser}
-          className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300"
+          className="sm:px-6 px-2 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300"
         >
           <Search className="w-5 h-5" />
         </button>
