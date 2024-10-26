@@ -97,6 +97,7 @@ function Social() {
     return (
       <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
         Loading....
+        <FooterAndNavbar/>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router-dom";
-
 import React from 'react'
 import RegisterPage from "../Components/Auth/RegisterPage";
 import LoginPage from "../Components/Auth/LoginPage";
@@ -24,6 +23,7 @@ const Routing = () => {
         <Route path="/newHabit" element={<CreateHabit/>}/>
         <Route path='/dataViz' element={<DataPage/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/groupHabitInvites" element={<GroupHabitPage />}/>
         <Route path="/social" element={<Social/>}/>
     </Routes>
     </AuthProvider>
