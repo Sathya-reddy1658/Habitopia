@@ -84,10 +84,12 @@ function AuthChecker() {
                 up!
               </p>
 
-              <button className="w-full bg-white text-indigo-600 py-3 rounded-full mb-10 mt-3 font-semibold text-sm">
+             <Link to={"/login"} className="w-full bg-white text-indigo-600 py-3 rounded-full mb-10 mt-3 font-semibold text-sm" >
+             <button>
                 Let's Begin the Journey
               </button>
-              <div className="flex  space-x-3">
+             </Link>
+              <div className="sm:flex hidden space-x-3">
                 <Link to="/login" className="flex-1 bg-black text-white py-3 rounded-full font-semibold text-sm flex items-center justify-center" >
                 <button className="flex items-center justify-center " >
                   <span className="mr-2"><img className="w-4" src="./Google.svg" alt="" /></span> Google
