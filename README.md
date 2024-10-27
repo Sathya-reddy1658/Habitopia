@@ -9,5 +9,5 @@ A streak based, habit tracking app that gets you addicted to building good habit
 
 ![home](./Screenshots/home.jpeg)
 ![newhabit](./Screenshots/newhabit.jpeg)
-
 ![dv](./Screenshots/dv.jpeg)
+
