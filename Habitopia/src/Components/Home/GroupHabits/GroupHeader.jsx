@@ -1,7 +1,7 @@
 import { Target, Users } from 'lucide-react'
 import React from 'react'
 
-function GroupHeader({groupData,memberDetails}) {
+function GroupHeader({groupData,memberDetails, memberData}) {
   return (
         <div className="bg-white rounded-lg shadow-xl p-8 border border-blue-100">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">

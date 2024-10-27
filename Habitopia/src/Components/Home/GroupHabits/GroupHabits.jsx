@@ -25,35 +25,8 @@ export default function GroupHabitPage() {
   useEffect(() => {
     const db = getDatabase();
     const firestoreDb = getFirestore();
-    const date = new Date();
-    date.setHours(date.getHours() + 5);
-    date.setMinutes(date.getMinutes() + 30);
-    const today = date.toISOString().split('T')[0]; 
 
     const groupRef = ref(db, `groupHabits/${groupId}`);
-    const member_prog=ref(db, `groupHabits/${groupId}/memberProgress`);
-    //console.log("the member prog is ",member_prog)
-
-    onValue(member_prog, async (snapshot) => {
-      const memberData = snapshot.val();
-      
-      if (memberData) {
-        Object.keys(memberData).forEach(async (userId) => {
-          const userDoc = await getDoc(doc(firestoreDb, "users", userId));
-          const member_name=userDoc.data().displayName
-          const userProgress = memberData[userId][today];
-          if (userProgress) {
-            console.log(`Progress for ${member_name} on ${today}:`, userProgress.progress);
-          } else {
-            console.log(`No progress data found for ${userId} on ${today}`);
-          }
-        });
-      } else {
-        console.log("No member data found.");
-      }
-    });
-
-
     const unsubscribeGroup = onValue(groupRef, async (snapshot) => {
       const data = snapshot.val();
       console.log("Fetched group data:", data); // Log fetched data
@@ -158,7 +131,7 @@ export default function GroupHabitPage() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <FooterAndNavbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="space-y-12">
+        <div className="space-y-12 my-10">
           <GroupHeader groupData={groupData} memberDetails={memberDetails} />
 
           {pendingInvites.length > 0 && (
@@ -199,14 +172,7 @@ export default function GroupHabitPage() {
             </div>
           )}
 
-          <MembersList
-            groupData={groupData}
-            selectedMember={selectedMember}
-            setSelectedMember={setSelectedMember}
-            memberDetails={memberDetails}
-          />
-
-          <ProgressChart progressData={progressData} memberDetails={memberDetails} selectedMember={selectedMember } />
+         
           
         </div>
 
