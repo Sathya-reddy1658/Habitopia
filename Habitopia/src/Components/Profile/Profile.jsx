@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom';
 import { PlusCircle, TrendingUp, Clipboard } from 'lucide-react';
 import { doc, getDoc, getFirestore, collection, getDocs } from 'firebase/firestore';
 import { app } from '../firebase/firebaseConfig';
-import sc1 from '../../../public/sc1.png';
-import sc2 from '../../../public/sc2.png';
-import sc3 from '../../../public/sc3.png';
 
 function Profile() {
   const { currentUser } = useAuth();
@@ -72,7 +69,7 @@ function Profile() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-indigo-700 via-indigo-600 to-indigo-800 min-h-screen text-white flex flex-col items-center">
+    <div className="bg-gradient-to-b pb-40 from-indigo-700 via-indigo-600 to-indigo-800 min-h-screen text-white flex flex-col items-center">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-indigo-700 rounded-2xl p-8 shadow-2xl mb-10 transition transform hover:scale-105">
           <div className="flex flex-col sm:flex-row items-center gap-6">
@@ -90,9 +87,9 @@ function Profile() {
                 </div>
               )}
               <div className="mt-5 flex items-center justify-center gap-2">
-                {scoreBadge >= 1 && <img src={sc1} className="w-10 h-10 shadow-md rounded-full" alt="Badge 1" />}
-                {scoreBadge >= 2 && <img src={sc2} className="w-10 h-10 shadow-md rounded-full" alt="Badge 2" />}
-                {scoreBadge >= 3 && <img src={sc3} className="w-10 h-10 shadow-md rounded-full" alt="Badge 3" />}
+                {scoreBadge >= 1 && <img src={"./sc1.svg"} className="w-10 h-10 shadow-md rounded-full" alt="Badge 1" />}
+                {scoreBadge >= 2 && <img src={"./sc2.svg"} className="w-10 h-10 shadow-md rounded-full" alt="Badge 2" />}
+                {scoreBadge >= 3 && <img src={"./sc3.svg"} className="w-10 h-10 shadow-md rounded-full" alt="Badge 3" />}
               </div>
               
             </div>
