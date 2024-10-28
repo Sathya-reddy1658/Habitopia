@@ -7,13 +7,10 @@ const ArticleCard = ({ habit }) => {
 
   return (
     <div className="relative bg-indigo-600 rounded-xl overflow-hidden border border-indigo-400/30 mb-6">
-      {/* Subtle indigo glow effect */}
       <div className="absolute inset-0 bg-indigo-400/5" />
       
-      {/* Header Section */}
       <div className="relative border-b border-indigo-400/20 p-4 bg-gradient-to-b from-indigo-500 to-indigo-600">
         <div className="space-y-4">
-          {/* Description Section */}
           <div>
             <div className="flex items-center gap-2 mb-2">
               <BookOpen className="w-4 h-4 text-indigo-200" />
@@ -26,7 +23,6 @@ const ArticleCard = ({ habit }) => {
             </p>
           </div>
 
-          {/* Purpose Section */}
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Target className="w-4 h-4 text-indigo-200" />
@@ -41,7 +37,6 @@ const ArticleCard = ({ habit }) => {
         </div>
       </div>
 
-      {/* Article Section */}
       <div className="relative p-4 mb-20 bg-indigo-600">
         <button
           onClick={() => setIsExpanded(!isExpanded)}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, getDocs, doc, getDoc } from 'firebase/firestore';
-import { getDatabase, ref, get, update, onValue } from 'firebase/database';
+import { getFirestore, doc, onSnapshot, getDoc } from 'firebase/firestore';
+import { getDatabase, ref, onValue } from 'firebase/database';
 import { app } from '../firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -23,72 +23,89 @@ function Social() {
   const navigate = useNavigate();
   const [incomingRequests, setIncomingRequests] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [friendsData, setFriendsData] = useState({});
   const [searchInput, setSearchInput] = useState('');
-  const [notificationCount, setNotificationCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('friends');
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [userData, setUserData] = useState(null);
 
-
-  const db = getFirestore(app);
-  const usersCollection = collection(db, "users");
-
   useEffect(() => {
-    async function fetchUserData() {
-      try {
-        const user_Ref = doc(db, "users", currentUser.uid);
-        console.log("Fetching data for user:", currentUser.uid);
-        const userSnapshot = await getDoc(user_Ref);
-        if (userSnapshot.exists()) {
-          setUserData(userSnapshot.data());
-          console.log("User data:", userSnapshot.data());
-        } else {
-          console.log("No such document!");
+    if (!friends.length) return;
+
+    const firestore = getFirestore(app);
+    const fetchFriendData = async () => {
+      const friendProfiles = {};
+      
+      for (const friendId of friends) {
+        try {
+          const friendDoc = await getDoc(doc(firestore, "users", friendId));
+          if (friendDoc.exists()) {
+            friendProfiles[friendId] = friendDoc.data();
+          }
+        } catch (error) {
+          console.error(`Error fetching data for friend ${friendId}:`, error);
         }
-      } catch (error) {
-        console.error("Error fetching user data: ", error);
       }
-    }
-    if (currentUser) {
-      fetchUserData();
-    }
-  }, [currentUser, db]);
+      
+      setFriendsData(friendProfiles);
+    };
+
+    fetchFriendData();
+  }, [friends]);
 
   useEffect(() => {
     if (!currentUser) return;
 
-    const invitesRef = ref(getDatabase(app), `users/${currentUser.uid}/groupHabitInvites`);
-    const unsubscribe = onValue(invitesRef, (snapshot) => {
-      const invitesData = snapshot.val();
-      setNotificationCount(invitesData ? Object.keys(invitesData).length : 0);
-    });
+    const db = getDatabase(app);
+    const userRef = ref(db, `users/${currentUser.uid}`);
 
+    const unsubscribe = onValue(userRef, (snapshot) => {
+      const userData = snapshot.val();
+
+      if (userData && userData.incoming_req) {
+        const requests = Array.isArray(userData.incoming_req) 
+          ? userData.incoming_req 
+          : Object.keys(userData.incoming_req);
+        
+        const requestObjects = requests.map(uid => ({
+          id: uid,
+          uid: uid
+        }));
+        
+        setIncomingRequests(requestObjects);
+      } else {
+        setIncomingRequests([]);
+      }
+      
+      if (userData && userData.friends) {
+        const friendsList = Array.isArray(userData.friends)
+          ? userData.friends
+          : Object.keys(userData.friends);
+        setFriends(friendsList);
+      }
+      
+      setIsLoading(false);
+    });
 
     return () => unsubscribe();
   }, [currentUser]);
 
-  const dbRef = ref(getDatabase(app), `users/${currentUser.uid}`);
   useEffect(() => {
     if (!currentUser) return;
 
-    const dbRef = ref(getDatabase(app), `users/${currentUser.uid}`);
+    const firestore = getFirestore(app);
+    const userDocRef = doc(firestore, "users", currentUser.uid);
 
-    Promise.all([
-      fetchIncomingRequests(dbRef, setIncomingRequests),
-      fetchFriends(dbRef, setFriends)
-    ])
-      .then(() => setIsLoading(false))
-      .catch(error => {
-        console.error("Error fetching data:", error);
-        setIsLoading(false);
-      });
+    const unsubscribe = onSnapshot(userDocRef, (doc) => {
+      if (doc.exists()) {
+        setUserData(doc.data());
+      }
+    });
+
+    return () => unsubscribe();
   }, [currentUser]);
-
-  const viewProfile = (friendUid) => {
-    navigate('/friend-dataviz', { state: { friendUid } });
-  };
 
   const showNotification = (message, type = 'info') => {
     alert(message);
@@ -97,17 +114,27 @@ function Social() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-indigo-50 flex items-center justify-center">
-        Loading....
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600" />
         <FooterAndNavbar />
       </div>
     );
   }
 
+  const friendsWithData = friends.map(friendId => ({
+    uid: friendId,
+    displayName: friendsData[friendId]?.displayName || 'Loading...',
+    photoURL: friendsData[friendId]?.photoURL,
+    email: friendsData[friendId]?.email,
+  }));
+
   return (
     <div className="bg-indigo-50 pb-40">
       <FooterAndNavbar />
       <div className="max-w-6xl mx-auto px-4">
-        <SocialHeader notificationCount={notificationCount} fid={userData.fid} />
+        <SocialHeader 
+          notificationCount={incomingRequests.length} 
+          fid={userData?.fid} 
+        />
 
         <NavigationTabs
           activeTab={activeTab}
@@ -119,7 +146,11 @@ function Social() {
           searchInput={searchInput}
           setSearchInput={setSearchInput}
           searchUser={() => searchUser(
-            setIsLoading, setSearchResults, searchInput, showNotification, setShowSearchResults
+            setIsLoading,
+            setSearchResults,
+            searchInput,
+            showNotification,
+            setShowSearchResults
           )}
           searchResults={searchResults}
           showSearchResults={showSearchResults}
@@ -130,8 +161,6 @@ function Social() {
           }}
         />
 
-
-
         <div className="space-y-6">
           {activeTab === 'requests' && incomingRequests.length > 0 && (
             <FriendRequests
@@ -139,14 +168,12 @@ function Social() {
               onAccept={(requestId) => acceptRequest(requestId, currentUser, setIncomingRequests, showNotification, setFriends)}
               onReject={(requestId) => rejectRequest(requestId, currentUser, setIncomingRequests, showNotification)}
             />
-
-
           )}
 
           {activeTab === 'friends' && (
             <FriendsList
-              friends={friends}
-              onViewProfile={(friendId) => viewProfile(friendId, navigate)}
+              friends={friendsWithData} 
+              onViewProfile={(friendId) => navigate('/friend-dataviz', { state: { friendUid: friendId } })}
               onRemoveFriend={(friendId) => removeFriend(friendId, currentUser, showNotification, setFriends)}
             />
           )}

@@ -192,7 +192,7 @@ const HabitsComponent = ({ selectedDate }) => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4">
+    <div className="max-w-xl mx-auto px-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-gray-900">
           Habits for {format(selectedDate, 'MMMM d, yyyy')}

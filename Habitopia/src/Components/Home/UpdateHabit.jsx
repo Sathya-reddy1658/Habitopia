@@ -18,7 +18,6 @@ function UpdateHabit() {
   const [progressValue, setProgressValue] = useState(0);
   const [completedCheckbox, setCompletedCheckbox] = useState(false);
 
-  // Keeping all your existing useEffect and handlers the same
   useEffect(() => {
     const fetchHabitData = async () => {
       if (currentUser && habitId) {
@@ -55,7 +54,6 @@ function UpdateHabit() {
   }, [currentUser, habitId, selectedDate]);
 
   const handleSubmit = async (e) => {
-    // Keeping your existing submit handler the same
     e.preventDefault();
     try {
       const dateProgressRef = doc(db, 'users', currentUser.uid, 'habits', habitId, 'dailyProgress', selectedDate);
@@ -124,7 +122,6 @@ function UpdateHabit() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-xl mx-auto px-4 py-6">
-        {/* Header */}
         <div className="flex items-center mb-6">
           <button 
             onClick={() => navigate('/home')} 
@@ -138,7 +135,6 @@ function UpdateHabit() {
           </div>
         </div>
 
-        {/* Progress Card */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center space-x-3">
@@ -188,7 +184,6 @@ function UpdateHabit() {
           </form>
         </div>
 
-        {/* Progress Status */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
           <div className="flex justify-between items-center">
             <p className="text-gray-600">Current Progress</p>

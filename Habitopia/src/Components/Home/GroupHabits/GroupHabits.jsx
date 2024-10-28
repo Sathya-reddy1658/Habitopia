@@ -29,7 +29,7 @@ export default function GroupHabitPage() {
     const groupRef = ref(db, `groupHabits/${groupId}`);
     const unsubscribeGroup = onValue(groupRef, async (snapshot) => {
       const data = snapshot.val();
-      console.log("Fetched group data:", data); // Log fetched data
+      console.log("Fetched group data:", data);
       if (data) {
         setGroupData(data);
 

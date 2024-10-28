@@ -19,7 +19,7 @@ const HabitCard = ({ habit, onClick, isEditable }) => {
 
   return (
     <div
-      className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 cursor-pointer"
+      className="bg-white rounded-xl px-3 py-2 shadow-sm border border-gray-100 cursor-pointer"
     >
       <div className="flex grow justify-between items-center" onClick={handleDvClick}>
         <div className="flex items-center space-x-3" >

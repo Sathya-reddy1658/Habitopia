@@ -35,11 +35,9 @@ const AreaGraph = ({ habit, progData, target }) => {
                 transition={{ duration: 0.5 }}
                 className="relative bg-indigo-600 rounded-xl border border-indigo-400/20 overflow-hidden"
             >
-                {/* Subtle gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-indigo-300/5 to-transparent" />
                 
                 <div className="relative p-4">
-                    {/* Header */}
                     <div className="mb-6 text-center">
                         <h3 className="text-2xl font-bold text-white">
                             {habit} Progress
@@ -49,7 +47,6 @@ const AreaGraph = ({ habit, progData, target }) => {
                         </p>
                     </div>
 
-                    {/* Chart */}
                     <div className="bg-indigo-500/20 rounded-lg p-4 border border-indigo-400/20">
                         <ResponsiveContainer width="100%" height={280}>
                             <AreaChart 
@@ -92,7 +89,6 @@ const AreaGraph = ({ habit, progData, target }) => {
                         </ResponsiveContainer>
                     </div>
 
-                    {/* Analysis Section */}
                     <div className="mt-6 bg-indigo-100/20 rounded-lg p-4 border border-indigo-400/20">
                         <h4 className="text-white text-sm font-medium mb-2">
                             Personalized Insights
