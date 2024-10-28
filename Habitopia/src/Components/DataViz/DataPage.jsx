@@ -54,7 +54,7 @@ const DataPage = () => {
   }
 
   return (
-    <div className='bg-indigo-600 select-none gap-4 min-h-screen flex flex-col items-center justify-start p-4 md:p-8'>
+    <div className='bg-indigo-600 pb-40 select-none gap-4 min-h-screen flex flex-col items-center justify-start p-4 md:p-8'>
       <motion.header
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}

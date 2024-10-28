@@ -1,4 +1,5 @@
 import React from 'react'
+import "./index.css"
 import Routing from './Routings/Routing'
 function App() {
   return (

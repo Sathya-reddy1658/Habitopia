@@ -48,7 +48,7 @@ const Home = () => {
   }, [currentUser, db]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 selection:bg-indigo-200">
+    <div className="pb-40 bg-gradient-to-b from-gray-50 to-gray-100 selection:bg-indigo-200">
      <FooterAndNavbar/>
       <div className="max-w-2xl sm:mt-20 mt-5 mx-auto px-4 sm:px-6 py-8 sm:py-12">
     

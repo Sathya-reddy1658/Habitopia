@@ -13,6 +13,8 @@ import DataPage from "../Components/DataViz/DataPage"
 import GroupHabitInvites from "../Components/social/GroupHabitInvites";
 import IndividualDataViz from "../Components/DataViz/IndividualDataViz";
 import FriendDataPage from "../Components/DataViz/friend_datapage";
+import ViewHabits from "../Components/ViewHabits/ViewHabits";
+
 const Routing = () => {
   return (
     
@@ -30,6 +32,8 @@ const Routing = () => {
         <Route path="/groupHabitInvites" element={<GroupHabitInvites />}/>
         <Route path="/social" element={<Social/>}/>
         <Route path="/friend-dataviz" element={< FriendDataPage />} />
+        <Route path="/viewhabits" element={< ViewHabits />} />
+        
     </Routes>
     </AuthProvider>
   )

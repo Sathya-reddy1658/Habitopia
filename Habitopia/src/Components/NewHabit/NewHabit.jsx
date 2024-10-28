@@ -76,7 +76,7 @@ function NewHabit() {
   };
 
   return (
-    <div className="h-[100vh] select-none bg-indigo-600  flex items-start justify-center sm:items-center p-4">
+    <div className="select-none pb-40 bg-indigo-600  flex items-start justify-center sm:items-center p-6">
       <div className="w-full max-w-md bg-white/10 rounded-lg overflow-hidden">
         <div className="bg-indigo-600 p-4 sm:p-2">
           <h1 className="text-3xl font-bold text-white text-center">New Habit</h1>
@@ -149,7 +149,7 @@ function NewHabit() {
           )}
           <button
             type="submit"
-            className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
+            className="w-full  flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
           >
             <PlusCircle className="mr-2" size={20} />
             Add Habit
