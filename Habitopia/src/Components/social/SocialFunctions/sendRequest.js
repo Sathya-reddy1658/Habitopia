@@ -14,28 +14,39 @@ export const sendRequest = async (
   }
 
   const db = getDatabase(app);
-  const dbRef = ref(db, `users/${currentUser.uid}`);
+  const userRef = ref(db, `users/${currentUser.uid}`);
   const friendRef = ref(db, `users/${targetUid}`);
 
   try {
-    const snapshot = await get(dbRef);
-    const userData = snapshot.val() || {};
-    const outgoingRequests = userData.outgoing_req || [];
-    const userCurrentFriends = userData.friends || [];
+    const userSnapshot = await get(userRef);
+    const friendSnapshot = await get(friendRef);
 
-    if (outgoingRequests.includes(targetUid)) {
-      showNotification("Friend request already sent!", 'info');
+    if (!userSnapshot.exists() || !friendSnapshot.exists()) {
+      showNotification("User not found.", 'error');
       return;
     }
-    
+
+    const userData = userSnapshot.val();
+    const friendData = friendSnapshot.val();
+
+    const outgoingRequests = userData.outgoing_req || [];
+    const userCurrentFriends = userData.friends || [];
+    const incomingRequests = friendData.incoming_req || [];
+
     if (userCurrentFriends.includes(targetUid)) {
       showNotification("Already Friends!", 'info');
       return;
     }
 
-    const friendSnapshot = await get(friendRef);
-    const friendData = friendSnapshot.val() || {};
-    const incomingRequests = friendData.incoming_req || [];
+    if (outgoingRequests.includes(targetUid)) {
+      showNotification("Friend request already sent!", 'info');
+      return;
+    }
+
+    if (incomingRequests.includes(currentUser.uid)) {
+      showNotification(`You have already sent a request to ${targetName}.`, 'info');
+      return;
+    }
 
     const updates = {};
     updates[`users/${currentUser.uid}/outgoing_req`] = [...outgoingRequests, targetUid];
