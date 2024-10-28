@@ -101,7 +101,7 @@ function Profile() {
           <Link to="/newHabit">
             <QuickActionCard title="New Habit" icon={<PlusCircle className="w-8 h-8" />} />
           </Link>
-          <Link to="/dataViz">
+          <Link to="/viewhabits">
             <QuickActionCard title="View Habits" icon={<TrendingUp className="w-8 h-8" />} />
           </Link>
         </div>
