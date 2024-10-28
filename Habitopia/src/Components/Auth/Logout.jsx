@@ -7,7 +7,7 @@ const Logout = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    try {
+    try { 
       await auth.signOut();
       navigate('/login');
     } catch (error) {
