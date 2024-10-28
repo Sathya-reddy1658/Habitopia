@@ -11,7 +11,6 @@ function FooterAndNavbar() {
 
   return (
     <>
-      {/* Desktop Navigation */}
       <nav className="hidden md:flex fixed top-0 select-none left-0 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link to="/home" className="text-xl font-bold hover:text-indigo-200 transition duration-300">
@@ -29,10 +28,8 @@ function FooterAndNavbar() {
         </div>
       </nav>
 
-      {/* Floating Mobile Navigation */}
       <nav className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-white rounded-full shadow-lg z-50">
         <div className="flex justify-around items-center h-16 px-6 relative">
-          {/* Left section */}
           <div className="flex space-x-8">
             <Link 
               to="/home" 
@@ -54,7 +51,6 @@ function FooterAndNavbar() {
             </Link>
           </div>
 
-          {/* Center Plus Button */}
           <Link 
             to="/newHabit"
             className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white"
@@ -62,7 +58,6 @@ function FooterAndNavbar() {
             <Plus className="w-8 h-8" strokeWidth={2.5} />
           </Link>
 
-          {/* Right section */}
           <div className="flex space-x-8">
             <Link 
               to="/social" 

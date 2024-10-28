@@ -18,11 +18,11 @@ export default function SearchSection({
           placeholder="Search by name or friend ID..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="flex-grow px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="flex-grow placeholder:text-sm px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button
           onClick={searchUser}
-          className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300"
+          className="sm:px-6 px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300"
         >
           <Search className="w-5 h-5" />
         </button>

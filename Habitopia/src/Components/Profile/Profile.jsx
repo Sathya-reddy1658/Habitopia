@@ -69,7 +69,7 @@ function Profile() {
   };
 
   return (
-    <div className="bg-gradient-to-b pb-40 from-indigo-700 via-indigo-600 to-indigo-800 min-h-screen text-white flex flex-col items-center">
+    <div className="sm:pt-20 bg-gradient-to-b pb-40 from-indigo-700 via-indigo-600 to-indigo-800 min-h-screen text-white flex flex-col items-center">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-indigo-700 rounded-2xl p-8 shadow-2xl mb-10 transition transform hover:scale-105">
           <div className="flex flex-col sm:flex-row items-center gap-6">
