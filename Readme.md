@@ -1,16 +1,40 @@
 # Habitopia
+
 ### Build the better you!
+
 A streak based, habit tracking app that gets you addicted to building good habits and staying productive.
-## Key Features:
-- Home Page: Look at all your habits at a glance and update the progress on each one of them. Also find date-wise records of your habits.
-![home](./Screenshots/home.jpeg)
-- New Habit: Allows you to add a new habit (Group or Individual) and set various parameters.
-![newhabit](./Screenshots/newhabit.jpeg)
-- Explore Page: Sleek Data visualizations that give you in-depth insights into your habit building progress.
-![dv](./Screenshots/dv.jpeg)
-- Social Features: Ability to add freinds and access their habit progress. Also opens the door to creation of group habits with friends.
-![social1](./Screenshots/social1.jpeg)
-- Group Habits: Can create habits for an entire group of friends and share your progress and track using leaderboard.
-![leader](./Screenshots/leader.jpeg)
-- Profile: A showcase of the User's profile, friend code, and the badges earnt by the user for the different score levels.
-![profile](./Screenshots/profile.jpeg)
+
+
+---
+
+## Running the Project Locally
+
+To set up and run the project on your local machine, follow these steps:
+
+1. **Install Dependencies**  
+   First, install the required dependencies by running the following command in your terminal:
+
+   ```bash
+   npm install
+   ```
+
+2. **Start the Development Server**  
+   After the dependencies are installed, start the development server with:
+
+   ```bash
+   npm run dev
+   ```
+
+   This will launch the project, and you should be able to access it at `http://localhost:5173` in your web browser.
+
+## Running with Docker
+
+If you prefer to run the project using Docker, you can do so by executing the following command:
+
+```bash
+docker run -p 5173:5173 habitopia1
+```
+
+This command will start the container and map port 5173 from the container to your local machine, allowing you to access the application at `http://localhost:5173`.
+
+---
